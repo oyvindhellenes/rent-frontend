@@ -39,7 +39,7 @@ function MasterCtrl($scope, $cookieStore, $resource) {
 
     // -------------- New stuff -------------- \\
 
-    var Equipment = $resource('http://127.0.0.1:8000/rent/api/equipment/');
+    var Equipment = $resource('http://127.0.0.1:8000/rent/equipment/');
 
     $scope.form = {
         type: "",
@@ -72,11 +72,17 @@ function MasterCtrl($scope, $cookieStore, $resource) {
     }
 
     $scope.removeEquipment = function(eq){
-        var equipment = new Equipment();
-        console.log('eq' + angular.toJson(eq));
-        var path = {
-            id: eq.id
-        }
-        equipment.$delete(path);
+
+        var id = eq.id
+        var Tmp = $resource('http://127.0.0.1:8000/rent/equipment/'+ id + '/');
+        var eq = new Tmp;
+        eq.$delete().then(function(results){
+            for (var i in $scope.equipment) {
+                if ($scope.equipment[i].id == id) {
+                    $scope.equipment.splice(i, 1);
+                };
+            }
+        });
+
     }
 }

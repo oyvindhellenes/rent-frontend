@@ -1,18 +1,5 @@
 <div class="row">
-	<div class="jumbotron">
 
-	  <form ng-submit="addEquipment()">
-	    <p>
-	      <input type="text" ng-model="form.type" placeholder="Type">
-	      <br>
-	      <input type="text" ng-model="form.description" placeholder="Description">
-	      <br>
-	      <input type="text" ng-model="form.location" placeholder="Location">
-	      <br>
-	      <button type="submit">Add</button>
-	    </p>
-	  </form>
-	</div>
 	<div class="col-lg-3 col-md-6 col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
@@ -57,6 +44,20 @@
 			</rd-widget-body>
 		</rd-widget>
 	</div>
+</div>
+<div class="jumbotron">
+
+  <form ng-submit="addEquipment()">
+    <p>
+      <input type="text" ng-model="form.type" placeholder="Type">
+      <br>
+      <input type="text" ng-model="form.description" placeholder="Description">
+      <br>
+      <input type="text" ng-model="form.location" placeholder="Location">
+      <br>
+      <button type="submit">Add</button>
+    </p>
+  </form>
 </div>
 
 <div class="row">
