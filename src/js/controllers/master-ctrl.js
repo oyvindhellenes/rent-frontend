@@ -37,7 +37,7 @@ function MasterCtrl($scope, $cookieStore, $resource) {
         $scope.$apply();
     };
 
-    // New stuff
+    // -------------- New stuff -------------- \\
 
     var Equipment = $resource('http://127.0.0.1:8000/rent/api/equipment/');
 
@@ -45,11 +45,13 @@ function MasterCtrl($scope, $cookieStore, $resource) {
         type: "",
         description: "",
         location: ""
+
     }
 
     $scope.equipment = {};
     Equipment.query(function(results){
         $scope.equipment = results;
+        console.log('val' + angular.toJson(results));
     })
 
     $scope.addEquipment = function(){
@@ -58,16 +60,23 @@ function MasterCtrl($scope, $cookieStore, $resource) {
         equipment.description = $scope.form.description;
         equipment.location = $scope.form.location;
 
-        console.log('test' +  $scope.form.type);
-
         equipment.$save().then(function(results){
             console.log(results);
+            $scope.equipment.push(results);
         })
+
+        $scope.form.type = " ";
+        $scope.form.description = " ";
+        $scope.form.location = " ";
+
     }
 
     $scope.removeEquipment = function(eq){
         var equipment = new Equipment();
-
-        equipment.$delete(eq);
+        console.log('eq' + angular.toJson(eq));
+        var path = {
+            id: eq.id
+        }
+        equipment.$delete(path);
     }
 }
